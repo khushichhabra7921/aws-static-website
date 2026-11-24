@@ -1,0 +1,29 @@
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo Installing PyTest
+      - pip install pytest
+
+  pre_build:
+    commands:
+      - echo Starting unit tests
+
+  build:
+    commands:
+      - echo Running tests
+      - python -m pytest -v
+
+  post_build:
+    commands:
+      - echo Build and testing completed
+
+artifacts:
+  files:
+    - app.py
+    - test_app.py
+    - buildspec.yml
