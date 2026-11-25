@@ -1,29 +1,14 @@
-
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.11
-    commands:
-      - echo Installing PyTest
-      - pip install pytest
-
   pre_build:
     commands:
-      - echo Starting unit tests
-
+      - echo Logging in to Amazon ECR
+      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 698609527213.dkr.ecr.ap-southeast-2.amazonaws.com
   build:
     commands:
-      - echo Running tests
-      - python -m pytest -v
-
+      - docker build -t assignment5-webapp .
+      - docker tag assignment5-webapp:latest 698609527213.dkr.ecr.ap-southeast-2.amazonaws.com/assignment5-webapp:latest
   post_build:
     commands:
-      - echo Build and testing completed
-
-artifacts:
-  files:
-    - '**/*'
-  name: python-unit-test-build.zip
-  discard-paths: no
+      - docker push 698609527213.dkr.ecr.ap-southeast-2.amazonaws.com/assignment5-webapp:latest
