@@ -24,6 +24,6 @@ phases:
 
 artifacts:
   files:
-    - app.py
-    - test_app.py
-    - buildspec.yml
+    - '**/*'
+  name: python-unit-test-build.zip
+  discard-paths: no
