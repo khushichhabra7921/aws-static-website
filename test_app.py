@@ -11,7 +11,3 @@ def test_multiply_numbers():
 
 def test_greet_user():
     assert greet_user("AWS") == "Hello, AWS!"
-
-
-def test_intentional_failure():
-    assert 1 == 2
